@@ -55,9 +55,9 @@ classifiers = ['Support Vector Machine', 'Random Forest Classifier', 'Gradient B
 training = "/Users/lidiiamelnyk/Documents/trans_train.csv"
 
 Comments = pd.read_csv(training,encoding='utf-8', sep = ';')
-Comments = Comments.dropna(axis = 0, how = 'any', inplace = False)
+Comments = Comments.drop(columns = ['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6'])
 #For converting all the stances into numerical values in both training and test data
-labelDict = {0:"Against", 1:"Favor", 2:"Neutral"}
+labelDict = {0:"__label__AGAINST", 1:"__label__FAVOR", 2:"__label__NEUTRAL"}
 Comments = labelStance(labelDict, Comments)
 print('Shape of label tensor:', Comments.shape)
 
@@ -67,7 +67,7 @@ def getWordVector(word, glove_word_vec_dict):
 		return glove_word_vec_dict[word]
 	return np.zeros_like(glove_word_vec_dict['dummy'])
 
-def sumVectors(finalList, glove_word_vect_dict):
+def sumVectors(finalList, glove_word_vec_dict):
 	numNonZero = 0
 	#get dummies
 	vector = np.zeros_like(glove_word_vec_dict['dummy'])
@@ -128,7 +128,7 @@ def glove(glove_word_vec_dict, trainComments):
 				#to break any combined word into its simplified components (e.g. hashtags)
 				finalList += simplify(word)
 			final_sentence = ' '.join(finalList)
-			listofComments.append(finalList)
+			listofComments.append(final_sentence)
 			listofStances.append(row['Label'])
 			CommentVector.append(sumVectors(finalList, glove_word_vec_dict))
 		return listofComments, listofStances, CommentVector
@@ -141,11 +141,11 @@ def glove(glove_word_vec_dict, trainComments):
 	X_train, X_test, y_train, y_test = train_test_split(trainCommentVector, listofStances, test_size= 0.1, random_state = 42)
 
 	Xtrain = np.asarray(X_train)
-	X_test = np.asarray(X_test)
+	Xtest = np.asarray(X_test)
 	ytrain = np.asarray(y_train)
 	ytest = np.asarray(y_test)
 
-	return X_train, y_train, X_test, y_test
+	return Xtrain, ytrain, Xtest, ytest
 
 totalAcc = []
 
@@ -153,24 +153,24 @@ for classifier in classifiers:
 	print( 'The machine learning model used for classification: ' + classifier )
 	temp = []
 	#['Support Vector Machine', 'Random Forest Classifier', 'Gradient Boosting Classifier',  'K Neighbors Classifier', 'Decision Tree Classifier']
-	X_train, X_test, y_train, y_test = glove(glove_word_vec_dict, Comments)
+	Xtrain, ytrain, Xtest, ytest = glove(glove_word_vec_dict, Comments)
 
 	if classifier == 'Support Vector Machine':
-		clf = SVC(kernel = 'rbf').fit(X_train, y_train)
+		clf = SVC(kernel = 'rbf').fit(Xtrain, ytrain)
 
 	elif classifier == 'Random Forest Classifier':
-		clf = RandomForestClassifier(n_estimators= 90).fit(X_train, y_train)
+		clf = RandomForestClassifier(n_estimators= 90).fit(Xtrain, ytrain)
 
 	elif classifier == 'Gradient Boosting Classifier':
-		clf = GradientBoostingClassifier().fit(X_train, y_train)
+		clf = GradientBoostingClassifier().fit(Xtrain, ytrain)
 
 	elif classifier == 'K Neighbors Classifier':
-		clf = GaussianNB().fit(X_train, y_train)
+		clf = GaussianNB().fit(Xtrain, ytrain)
 
 	elif classifier == 'Decision Tree Classifier':
-		clf = tree.DecisionTreeClassifier().fit(X_train, y_train)
+		clf = tree.DecisionTreeClassifier().fit(Xtrain, ytrain)
 
-	acc = clf.score(X_test, y_test)
+	acc = clf.score(Xtest, ytest)
 
 	print("Total Test Accuracy is " + str(round(acc * 100, 2)) + "%")
 	totalAcc.append(acc)
