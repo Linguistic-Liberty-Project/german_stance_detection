@@ -50,7 +50,29 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.flair text classifier">
+  <component name="RunManager" selected="Python.LSTM stance detection">
+    <configuration name="LSTM stance detection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="german_stance_detection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/miniforge3/bin/python3.9" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LSTM stance detection.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="elmo german" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="german_stance_detection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,9 +166,11 @@
       <item itemvalue="Python.elmo german" />
       <item itemvalue="Python.german sentiment analysis" />
       <item itemvalue="Python.flair text classifier" />
+      <item itemvalue="Python.LSTM stance detection" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.LSTM stance detection" />
         <item itemvalue="Python.flair text classifier" />
         <item itemvalue="Python.german sentiment analysis" />
         <item itemvalue="Python.elmo german" />
@@ -164,7 +188,8 @@
       <workItem from="1646315849151" duration="2906000" />
       <workItem from="1646401842800" duration="932000" />
       <workItem from="1646671372197" duration="6278000" />
-      <workItem from="1646734512955" duration="7881000" />
+      <workItem from="1646734512955" duration="9438000" />
+      <workItem from="1646836506925" duration="595000" />
     </task>
     <servers />
   </component>
@@ -236,7 +261,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/german_stance_detection$german_sentiment_analysis.coverage" NAME="german sentiment analysis Coverage Results" MODIFIED="1646722532494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/german_stance_detection$LSTM_stance_detection.coverage" NAME="LSTM stance detection Coverage Results" MODIFIED="1646836122016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/german_stance_detection$elmo_german.coverage" NAME="elmo german Coverage Results" MODIFIED="1646671773933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/german_stance_detection$elmo_vector.coverage" NAME="flair text classifier Coverage Results" MODIFIED="1646834859607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/german_stance_detection$elmo_vector.coverage" NAME="flair text classifier Coverage Results" MODIFIED="1646835289206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
