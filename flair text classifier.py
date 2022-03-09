@@ -51,28 +51,32 @@ def lemmatization(texts):
     output.append(' '.join(s))
   return output
 
-df_train['clean_text'] = lemmatization(df_train['clean_text'])
-df_test['clean_text'] = lemmatization(df_test['clean_text'])
+df_train['text'] = lemmatization(df_train['clean_text'])
+df_test['text'] = lemmatization(df_test['clean_text'])
 
-df_train.sample(10)
-
+from pathlib import Path
+filepath_train = Path('/Users/lidiiamelnyk/Documents/german_stance_detection/df_train.csv')
+filepath_train.parent.mkdir(parents=True, exist_ok=True)
+df_train.to_csv(filepath_train)
+filepath_test = Path('/Users/lidiiamelnyk/Documents/german_stance_detection/df_test.csv')
+df_test.to_csv(filepath_test)
 from flair.data import Corpus
-from flair.datasets import TREC_6
 from flair.embeddings import TransformerDocumentEmbeddings
 from flair.models import TextClassifier
 from flair.trainers import ModelTrainer
 
-document_embeddings = TransformerDocumentEmbeddings('bert-base-german-uncased')
+#create embedding
+document_embeddings = TransformerDocumentEmbeddings('bert-base-german-cased')
 
 from flair.data import Corpus, Sentence
-from flair.datasets import CSVClassificationCorpus
+from flair.data_fetcher import NLPTaskDataFetcher
 
-column_name_map = {1: "text", 2: "label"}
 
-corpus: Corpus = CSVClassificationCorpus(train_file =df_train,
-                                         test_file = df_test,
-                                         label_type = 'Label',
-                                         )
+corpus: Corpus = NLPTaskDataFetcher.load_classification_corpus(Path('/Users/lidiiamelnyk/Documents/german_stance_detection/'),
+                                                                    train_file ='df_train.csv',
+                                                                    test_file = 'df_test.csv',
+                                                                    label_type = 'Label',
+                                                            )
 label_type = 'Label'
 
 label_dict = corpus.make_label_dictionary(label_type=label_type)
